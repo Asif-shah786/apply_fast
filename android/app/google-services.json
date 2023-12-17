@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "645483594555",
+    "project_id": "apply-fast",
+    "storage_bucket": "apply-fast.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645483594555:android:7900f2c5f88102bc992d1e",
+        "android_client_info": {
+          "package_name": "com.applyfast.jobs.philotech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtagzdr_QERvA7y8S01K3FWwqppLnO0fM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

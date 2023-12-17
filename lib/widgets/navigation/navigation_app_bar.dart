@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -20,8 +21,8 @@ class NavigationAppBar extends StatelessWidget implements PreferredSizeWidget {
             itemBuilder: (context) => [
               PopupMenuItem(
                 child: const Text('Sign out'),
-                onTap: () {
-                  // Sign out logic
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
                 },
               ),
             ],

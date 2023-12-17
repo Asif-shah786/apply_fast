@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_dashboard_template/features/dashboard/dummy_inventories.dart';
 import 'package:flutter_admin_dashboard_template/features/dashboard/inventory.dart';

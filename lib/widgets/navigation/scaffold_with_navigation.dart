@@ -7,32 +7,34 @@ import 'package:responsive_framework/responsive_framework.dart';
 class ScaffoldWithNavigation extends StatelessWidget {
   const ScaffoldWithNavigation({
     super.key,
-    required this.navigationShell,
+    required this.navigationShell, required this.showNavigation,
   });
 
   final StatefulNavigationShell navigationShell;
+  final bool showNavigation;
 
   @override
   Widget build(BuildContext context) {
     final breakpoint = ResponsiveBreakpoints.of(context).breakpoint;
     return switch (breakpoint.name) {
-      MOBILE || TABLET => _ScaffoldWithDrawer(navigationShell),
-      (_) => _ScaffoldWithNavigationRail(navigationShell),
+      MOBILE || TABLET => _ScaffoldWithDrawer(navigationShell, showNavigation),
+      (_) => _ScaffoldWithNavigationRail(navigationShell, showNavigation),
     };
   }
 }
 
 class _ScaffoldWithNavigationRail extends StatelessWidget {
-  const _ScaffoldWithNavigationRail(this.navigationShell);
+  const _ScaffoldWithNavigationRail(this.navigationShell, this.showNavigation);
 
   final StatefulNavigationShell navigationShell;
+  final bool showNavigation;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     return Scaffold(
-      appBar: const NavigationAppBar(),
+      appBar: showNavigation ? const NavigationAppBar() : null,
       body: Row(
         children: [
           Column(
@@ -62,17 +64,18 @@ class _ScaffoldWithNavigationRail extends StatelessWidget {
 }
 
 class _ScaffoldWithDrawer extends StatelessWidget {
-  const _ScaffoldWithDrawer(this.navigationShell);
+  const _ScaffoldWithDrawer(this.navigationShell, this.showNavigation);
 
   final StatefulNavigationShell navigationShell;
+  final bool showNavigation;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: const NavigationAppBar(),
+      appBar: showNavigation ? const NavigationAppBar() : null,
       body: navigationShell,
-      drawer: Drawer(
+      drawer: !showNavigation ? null : Drawer(
         child: Column(
           children: [
             DrawerHeader(
@@ -104,7 +107,7 @@ class _ScaffoldWithDrawer extends StatelessWidget {
 }
 
 class _NavigationRail extends StatelessWidget {
-  const _NavigationRail({required this.navigationShell, required this.expand});
+  const _NavigationRail({required this.navigationShell, required this.expand,});
 
   final StatefulNavigationShell navigationShell;
   final bool expand;
@@ -120,6 +123,8 @@ class _NavigationRail extends StatelessWidget {
         fontWeight: FontWeight.bold,
       ),
       onDestinationSelected: (index) {
+        print('index: $index');
+        print('navigationShell.currentIndex: ${navigationShell.currentIndex}');
         navigationShell.goBranch(
           index,
           initialLocation: index == navigationShell.currentIndex,

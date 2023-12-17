@@ -8,15 +8,22 @@ environment:
 
 dependencies:
   adaptive_theme:
+  animate_do: ^3.1.2
   collection:
   cupertino_icons:
+  firebase_auth: ^4.15.3
+  firebase_core: ^2.24.2
   flutter:
     sdk: flutter
+  flutter_hooks: ^0.20.3
+  flutter_riverpod: ^2.4.9
+
   flutter_web_plugins:
     sdk: flutter
   gap:
   go_router:
   google_fonts:
+  hooks_riverpod: ^2.4.9
   intersperse:
   recase:
   responsive_framework:

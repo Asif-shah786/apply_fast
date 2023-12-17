@@ -1,23 +1,31 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_dashboard_template/theme.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
+import 'firebase_options.dart';
 import 'router.dart';
 
-void main() {
+
+
+Future<void> main() async {
   usePathUrlStrategy();
-  runApp(const App());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const ProviderScope(child: App()));
 }
 
-class App extends StatelessWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
-  static const title = 'Flutter Admin Dashboard';
+  static const title = 'Apply Fast';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
     return AdaptiveTheme(
       light: AppTheme.light,
       dark: AppTheme.dark,
@@ -30,7 +38,9 @@ class App extends StatelessWidget {
         ],
         child: MaterialApp.router(
           title: title,
-          routerConfig: router,
+          routeInformationParser: router.routeInformationParser,
+          routerDelegate: router.routerDelegate,
+          routeInformationProvider: router.routeInformationProvider,
           theme: theme,
           darkTheme: darkTheme,
         ),
